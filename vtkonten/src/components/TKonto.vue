@@ -10,6 +10,29 @@ const props = defineProps({
     type: Array
   }
 })
+
+const kontobuchungen = computed(() => {
+  const kb = [];
+  props.buchungen.forEach((element,index) => {
+    const b = {
+      zeile: index +1,
+      tsoll: '',
+      bsoll: '',
+      thaben: '',
+      bhaben: ''
+    };
+    if (element.ksoll == props.kontoname) {
+        b.tsoll= element.text;
+        b.bsoll= element.btrsoll;
+    }
+    if (element.khaben == props.kontoname) {
+        b.thaben= element.text;
+        b.bhaben= element.btrhaben;
+    }
+    kb.push(b);
+  })
+  return kb;
+})
 const sumsoll = computed(() => {
   var sum = 0;
   props.buchungen.forEach((element) => {
@@ -29,43 +52,46 @@ const sumhaben = computed(() => {
 
 <template>
   <div class="konto">
-  <table>
-    <caption>
-      {{
-        kontoname
-      }}
-    </caption>
-    <tr class="top">
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    <tr v-for="buchung in buchungen">
-      <td class="btext">{{ buchung.tsoll }}</td>
-      <td class="bbtr">{{ buchung.bsoll }}</td>
-      <td class="center btext">{{ buchung.thaben }}</td>
-      <td class="bbtr">{{ buchung.bhaben }}</td>
-    </tr>
-    <tr>
-      <td></td>
-      <td class="bbtr">{{ sumsoll }}</td>
-      <td></td>
-      <td class="bbtr">{{ sumhaben }}</td>
-    </tr>
-  </table>
-</div>
+    <table>
+      <caption>
+        {{
+          kontoname
+        }}
+      </caption>
+      <tr class="top">
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      <tr v-for="buchung in kontobuchungen">
+        <td>{{ buchung.zeile }}</td>
+        <td class="btext">{{ buchung.tsoll }}</td>
+        <td class="bbtr">{{ buchung.bsoll }}</td>
+        <td class="center btext">{{ buchung.thaben }}</td>
+        <td class="bbtr">{{ buchung.bhaben }}</td>
+      </tr>
+      <tr>
+        <td></td>
+        <td></td>
+        <td class="bbtr">{{ sumsoll }}</td>
+        <td></td>
+        <td class="bbtr">{{ sumhaben }}</td>
+      </tr>
+    </table>
+  </div>
 </template>
 
 <style scoped>
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  margin:auto;
+  margin: auto;
 }
 
 div.konto {
-  float:left;
+  float: left;
   box-shadow: 3px 3px 5px lightgray;
   width: 400px;
   border: 1px solid #e1e1e1;
@@ -75,9 +101,10 @@ div.konto {
   margin-bottom: 1em;
 }
 
-caption{
+caption {
   font-weight: bold;
 }
+
 .top th {
   border-bottom: 3px solid black;
 }
