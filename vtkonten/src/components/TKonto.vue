@@ -13,7 +13,7 @@ const props = defineProps({
 const sumsoll = computed(() => {
   var sum = 0;
   props.buchungen.forEach((element) => {
-    sum = sum + element.bsoll;
+    sum = sum + Number(element.bsoll);
   })
   return sum;
 });
@@ -21,7 +21,7 @@ const sumsoll = computed(() => {
 const sumhaben = computed(() => {
   var sum = 0;
   props.buchungen.forEach((element) => {
-    sum = sum + element.bhaben;
+    sum = sum + Number(element.bhaben);
   })
   return sum;
 });
