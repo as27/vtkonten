@@ -28,7 +28,8 @@ const sumhaben = computed(() => {
 </script>
 
 <template>
-  <table class="konto">
+  <div class="konto">
+  <table>
     <caption>
       {{
         kontoname
@@ -53,16 +54,30 @@ const sumhaben = computed(() => {
       <td class="bbtr">{{ sumhaben }}</td>
     </tr>
   </table>
+</div>
 </template>
 
 <style scoped>
 table {
-  width: 50%;
   border-collapse: collapse;
   border-spacing: 0;
-  margin-top: 2em;
+  margin:auto;
 }
 
+div.konto {
+  float:left;
+  box-shadow: 3px 3px 5px lightgray;
+  width: 400px;
+  border: 1px solid #e1e1e1;
+  border-radius: 5px;
+  padding: 3px;
+  margin-right: 0.5em;
+  margin-bottom: 1em;
+}
+
+caption{
+  font-weight: bold;
+}
 .top th {
   border-bottom: 3px solid black;
 }
