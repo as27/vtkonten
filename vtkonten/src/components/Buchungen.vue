@@ -7,6 +7,8 @@ defineEmits(['update:modelValue'])
 
 const kontendef = ref("Bank,Kasse")
 
+const nextIndex = ref(2);
+
 const konten = computed(() => {
   return kontendef.value.split(",");
 });
@@ -23,7 +25,7 @@ const farben = ref([
 
 function addRow() {
   props.modelValue.push({
-    zeile: props.modelValue.length + 1,
+    zeile: nextIndex.value,
     text: '',
     ksoll: '',
     btrsoll: '',
@@ -31,6 +33,12 @@ function addRow() {
     btrhaben: '',
     color: ''
   })
+  nextIndex.value++;
+}
+
+function deleteRow(index){
+  console.log("delete"+index)
+  props.modelValue.splice(index,1);
 }
 </script>
 
@@ -46,9 +54,10 @@ function addRow() {
       <th>Haben</th>
       <th>Betrag</th>
       <th>Farbe</th>
+      <th></th>
     </tr>
-    <tr v-for="buchung in modelValue">
-      <td>{{ buchung.zeile }}
+    <tr v-for="(buchung,bzeile) in modelValue">
+      <td>{{ buchung.zeile }} {{  }}
       </td>
       <td><input v-model="buchung.text" />
       </td>
@@ -70,6 +79,7 @@ function addRow() {
           <option v-for="f in farben" :value="f.val">{{ f.name }}</option>
         </select>
       </td>
+      <td><a @click="deleteRow(bzeile)">Zeile entfernen</a></td>
     </tr>
   </table>
 

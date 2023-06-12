@@ -15,7 +15,7 @@ const kontobuchungen = computed(() => {
   const kb = [];
   props.buchungen.forEach((element,index) => {
     const b = {
-      zeile: index +1,
+      zeile: element.zeile,
       tsoll: '',
       bsoll: '',
       thaben: '',

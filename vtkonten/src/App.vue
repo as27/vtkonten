@@ -3,7 +3,6 @@ import { ref } from 'vue'
 
 import Buchungen from './components/Buchungen.vue'
 import TKonten from './components/Tkonten.vue'
-import Kontendef from './components/Kontendef.vue';
 
 
 const buchungen = ref([
