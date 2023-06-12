@@ -5,16 +5,18 @@ import Buchungen from './components/Buchungen.vue'
 import TKonten from './components/Tkonten.vue'
 import Kontendef from './components/Kontendef.vue';
 
+
 const buchungen = ref([
   {
+    zeile: 1,
     text: '',
     ksoll: '',
     btrsoll: '',
     khaben: '',
-    btrhaben: ''
+    btrhaben: '',
+    color: ''
   }
 ])
-
 
 
 </script>

@@ -19,31 +19,40 @@ const kontobuchungen = computed(() => {
       tsoll: '',
       bsoll: '',
       thaben: '',
-      bhaben: ''
+      bhaben: '',
+      color: ''
     };
     if (element.ksoll == props.kontoname) {
         b.tsoll= element.text;
         b.bsoll= element.btrsoll;
+        b.color= element.color
     }
     if (element.khaben == props.kontoname) {
         b.thaben= element.text;
         b.bhaben= element.btrhaben;
+        b.color= element.color
     }
     kb.push(b);
   })
   return kb;
 })
 const sumsoll = computed(() => {
+  if (kontobuchungen === null){
+    return 0;
+  }
   var sum = 0;
-  props.buchungen.forEach((element) => {
+  kontobuchungen.value.forEach((element) => {
     sum = sum + Number(element.bsoll);
   })
   return sum;
 });
 
 const sumhaben = computed(() => {
+  if (kontobuchungen === null){
+    return 0;
+  }
   var sum = 0;
-  props.buchungen.forEach((element) => {
+  kontobuchungen.value.forEach((element) => {
     sum = sum + Number(element.bhaben);
   })
   return sum;
@@ -53,20 +62,14 @@ const sumhaben = computed(() => {
 <template>
   <div class="konto">
     <table>
-      <caption>
-        {{
-          kontoname
-        }}
-      </caption>
       <tr class="top">
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th class="linenr"></th>
+        <th class="line" colspan="4">{{ kontoname }}</th>
       </tr>
-      <tr v-for="buchung in kontobuchungen">
-        <td>{{ buchung.zeile }}</td>
+      <tr v-for="buchung in kontobuchungen" 
+      :style="{'background-color': buchung.color}"
+      >
+        <td class="linenr">{{ buchung.zeile }}</td>
         <td class="btext">{{ buchung.tsoll }}</td>
         <td class="bbtr">{{ buchung.bsoll }}</td>
         <td class="center btext">{{ buchung.thaben }}</td>
@@ -75,9 +78,9 @@ const sumhaben = computed(() => {
       <tr>
         <td></td>
         <td></td>
-        <td class="bbtr">{{ sumsoll }}</td>
+        <td class="bbtr sum">{{ sumsoll }}</td>
         <td></td>
-        <td class="bbtr">{{ sumhaben }}</td>
+        <td class="bbtr sum">{{ sumhaben }}</td>
       </tr>
     </table>
   </div>
@@ -96,7 +99,7 @@ div.konto {
   width: 400px;
   border: 1px solid #e1e1e1;
   border-radius: 5px;
-  padding: 3px;
+  padding: 1em;
   margin-right: 0.5em;
   margin-bottom: 1em;
 }
@@ -105,30 +108,44 @@ caption {
   font-weight: bold;
 }
 
-.top th {
+.top th.line {
   border-bottom: 3px solid black;
 }
 
 th {
+  padding: 0px;
   font-weight: bold;
+  text-align: center;
+}
+td.linenr {
+  width: 20px;
+  text-align: center;
+  border-bottom: 0px;
 }
 
 td {
-  width: 25%;
-  padding: 0;
-  margin: 0;
+
+  border-bottom: 1px dotted #eaeaea;
 }
+
+
 
 .center {
   border-left: 3px solid black;
 }
 
 .bbtr {
+  width: 60px;
   text-align: right;
   padding-right: 0.3em;
 }
 
 .btext {
+  width: 200px;
   padding-left: 0.3em;
+}
+
+.sum {
+  font-weight: bold;
 }
 </style>

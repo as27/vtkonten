@@ -9,7 +9,6 @@ const props = defineProps({
 })
 
 
-//console.log(props)
 const kontobuchungen = computed(() => {
   var k = {};
   props.buchungen.forEach(element => {
@@ -38,8 +37,8 @@ const kontobuchungen = computed(() => {
   });
   delete k[""];
   return k;
+  
 });
-//console.log(kontobuchungen);
 
 
 </script>

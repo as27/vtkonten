@@ -11,22 +11,25 @@ const konten = computed(() => {
   return kontendef.value.split(",");
 });
 
-const buchungen = ref([
-  {
-    text: '',
-    ksoll: '',
-    btrsoll: '',
-    khaben: '',
-    btrhaben: ''
-  }
+const farben = ref([
+  {val:"",name:""},
+  {val:"#D3D3D3",name:"grau"},
+  {val:"#FFFACD",name:"gelb"},
+  {val:"#ADD8E6",name:"blau"},
+  {val:"#F08080",name:"rot"},
+  {val:"#90EE90",name:"grün"}
 ])
+
+
 function addRow() {
   props.modelValue.push({
+    zeile: props.modelValue.length + 1,
     text: '',
     ksoll: '',
     btrsoll: '',
     khaben: '',
-    btrhaben: ''
+    btrhaben: '',
+    color: ''
   })
 }
 </script>
@@ -35,16 +38,19 @@ function addRow() {
   <input v-model="kontendef" />
   <table>
     <tr>
+      <th>Zeile</th>
       <th>Text</th>
       <th>Soll</th>
       <th>Betrag</th>
       <th></th>
       <th>Haben</th>
       <th>Betrag</th>
+      <th>Farbe</th>
     </tr>
     <tr v-for="buchung in modelValue">
+      <td>{{ buchung.zeile }}
+      </td>
       <td><input v-model="buchung.text" />
-
       </td>
       <td>
         <select v-model="buchung.ksoll">
@@ -59,6 +65,11 @@ function addRow() {
         </select>
       </td>
       <td class="btr"><input v-model="buchung.btrhaben" /></td>
+      <td>
+        <select v-model="buchung.color">
+          <option v-for="f in farben" :value="f.val">{{ f.name }}</option>
+        </select>
+      </td>
     </tr>
   </table>
 
