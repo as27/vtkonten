@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from '@vue/reactivity';
+import { computed } from '@vue/reactivity'
 
 const props = defineProps({
   kontoname: {
@@ -12,8 +12,8 @@ const props = defineProps({
 })
 
 const kontobuchungen = computed(() => {
-  const kb = [];
-  props.buchungen.forEach((element,index) => {
+  const kb = []
+  props.buchungen.forEach((element, index) => {
     const b = {
       zeile: element.zeile,
       tsoll: '',
@@ -21,42 +21,42 @@ const kontobuchungen = computed(() => {
       thaben: '',
       bhaben: '',
       color: ''
-    };
+    }
     if (element.ksoll == props.kontoname) {
-        b.tsoll= element.text;
-        b.bsoll= element.btrsoll;
-        b.color= element.color
+      b.tsoll = element.text
+      b.bsoll = element.btrsoll
+      b.color = element.color
     }
     if (element.khaben == props.kontoname) {
-        b.thaben= element.text;
-        b.bhaben= element.btrhaben;
-        b.color= element.color
+      b.thaben = element.text
+      b.bhaben = element.btrhaben
+      b.color = element.color
     }
-    kb.push(b);
+    kb.push(b)
   })
-  return kb;
+  return kb
 })
 const sumsoll = computed(() => {
-  if (kontobuchungen === null){
-    return 0;
+  if (kontobuchungen === null) {
+    return 0
   }
-  var sum = 0;
+  var sum = 0
   kontobuchungen.value.forEach((element) => {
-    sum = sum + Number(element.bsoll);
+    sum = sum + Number(element.bsoll)
   })
-  return sum;
-});
+  return sum
+})
 
 const sumhaben = computed(() => {
-  if (kontobuchungen === null){
-    return 0;
+  if (kontobuchungen === null) {
+    return 0
   }
-  var sum = 0;
+  var sum = 0
   kontobuchungen.value.forEach((element) => {
-    sum = sum + Number(element.bhaben);
+    sum = sum + Number(element.bhaben)
   })
-  return sum;
-});
+  return sum
+})
 </script>
 
 <template>
@@ -66,9 +66,7 @@ const sumhaben = computed(() => {
         <th class="linenr"></th>
         <th class="line" colspan="4">{{ kontoname }}</th>
       </tr>
-      <tr v-for="buchung in kontobuchungen" 
-      :style="{'background-color': buchung.color}"
-      >
+      <tr v-for="buchung in kontobuchungen" :style="{ 'background-color': buchung.color }">
         <td class="linenr">{{ buchung.zeile }}</td>
         <td class="btext">{{ buchung.tsoll }}</td>
         <td class="bbtr">{{ buchung.bsoll }}</td>
@@ -124,11 +122,8 @@ td.linenr {
 }
 
 td {
-
   border-bottom: 1px dotted #eaeaea;
 }
-
-
 
 .center {
   border-left: 3px solid black;

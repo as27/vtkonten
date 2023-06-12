@@ -4,7 +4,6 @@ import { ref } from 'vue'
 import Buchungen from './components/Buchungen.vue'
 import TKonten from './components/Tkonten.vue'
 
-
 const buchungen = ref([
   {
     zeile: 1,
@@ -16,16 +15,12 @@ const buchungen = ref([
     color: ''
   }
 ])
-
-
 </script>
 
 <template>
   <main>
-
     <Buchungen v-model="buchungen" />
     <TKonten :buchungen="buchungen" />
-    
   </main>
 </template>
 

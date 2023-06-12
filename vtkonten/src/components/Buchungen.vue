@@ -1,27 +1,26 @@
 <script setup>
-import { computed } from '@vue/reactivity';
+import { computed } from '@vue/reactivity'
 import { ref } from 'vue'
 
 const props = defineProps(['modelValue'])
 defineEmits(['update:modelValue'])
 
-const kontendef = ref("Bank,Kasse")
+const kontendef = ref('Bank,Kasse')
 
-const nextIndex = ref(2);
+const nextIndex = ref(2)
 
 const konten = computed(() => {
-  return kontendef.value.split(",");
-});
+  return kontendef.value.split(',')
+})
 
 const farben = ref([
-  {val:"",name:""},
-  {val:"#D3D3D3",name:"grau"},
-  {val:"#FFFACD",name:"gelb"},
-  {val:"#ADD8E6",name:"blau"},
-  {val:"#F08080",name:"rot"},
-  {val:"#90EE90",name:"grün"}
+  { val: '', name: '' },
+  { val: '#D3D3D3', name: 'grau' },
+  { val: '#FFFACD', name: 'gelb' },
+  { val: '#ADD8E6', name: 'blau' },
+  { val: '#F08080', name: 'rot' },
+  { val: '#90EE90', name: 'grün' }
 ])
-
 
 function addRow() {
   props.modelValue.push({
@@ -33,12 +32,12 @@ function addRow() {
     btrhaben: '',
     color: ''
   })
-  nextIndex.value++;
+  nextIndex.value++
 }
 
-function deleteRow(index){
-  console.log("delete"+index)
-  props.modelValue.splice(index,1);
+function deleteRow(index) {
+  console.log('delete' + index)
+  props.modelValue.splice(index, 1)
 }
 </script>
 
@@ -56,11 +55,9 @@ function deleteRow(index){
       <th>Farbe</th>
       <th></th>
     </tr>
-    <tr v-for="(buchung,bzeile) in modelValue">
-      <td>{{ buchung.zeile }} {{  }}
-      </td>
-      <td><input v-model="buchung.text" />
-      </td>
+    <tr v-for="(buchung, bzeile) in modelValue">
+      <td>{{ buchung.zeile }} {{}}</td>
+      <td><input v-model="buchung.text" /></td>
       <td>
         <select v-model="buchung.ksoll">
           <option v-for="k in konten">{{ k }}</option>
