@@ -55,9 +55,9 @@ function deleteRow(index) {
       <th>Farbe</th>
       <th></th>
     </tr>
-    <tr v-for="(buchung, bzeile) in modelValue">
-      <td>{{ buchung.zeile }} {{}}</td>
-      <td><input v-model="buchung.text" /></td>
+    <tr v-for="(buchung, bzeile) in modelValue" :style="{ 'background-color': buchung.color }" >
+      <td class="zeile"><input v-model="buchung.zeile" /></td>
+      <td class="text"><input v-model="buchung.text" /></td>
       <td>
         <select v-model="buchung.ksoll">
           <option v-for="k in konten">{{ k }}</option>
@@ -76,16 +76,25 @@ function deleteRow(index) {
           <option v-for="f in farben" :value="f.val">{{ f.name }}</option>
         </select>
       </td>
-      <td><a @click="deleteRow(bzeile)">Zeile entfernen</a></td>
+      <td><a @click="deleteRow(bzeile)"><img width="14" height="14" src="./../assets/minus.svg" /></a></td>
     </tr>
   </table>
-
-  <a @click="addRow">Add row</a>
+  <img @click="addRow" width="14" height="14" src="./../assets/plus.svg" />&nbsp;
+  <a @click="addRow">Add row </a>
 </template>
 
 <style scoped>
-input {
-  width: 80%;
+
+input,select {
+  background-color: transparent;
+}
+.text input {
+  width: 150px;
+}
+
+.zeile input {
+  width: 20px;
+  text-align: center;
 }
 
 .btr input {
