@@ -18,7 +18,7 @@ const farben = ref([
   { val: '#D3D3D3', name: 'grau' },
   { val: '#FFFACD', name: 'gelb' },
   { val: '#ADD8E6', name: 'blau' },
-  { val: '#F08080', name: 'rot' },
+  { val: '#f5c1c1', name: 'rot' },
   { val: '#90EE90', name: 'grün' }
 ])
 
@@ -42,7 +42,7 @@ function deleteRow(index) {
 </script>
 
 <template>
-  <input v-model="kontendef" />
+  <input v-model="kontendef" size="80" />
   <table>
     <tr>
       <th>Zeile</th>
