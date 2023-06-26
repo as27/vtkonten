@@ -44,3 +44,7 @@ const kontobuchungen = computed(() => {
     <TKonto v-for="(val, key) in kontobuchungen" :kontoname="key" :buchungen="buchungen" />
   </div>
 </template>
+
+<style scoped>
+
+</style>

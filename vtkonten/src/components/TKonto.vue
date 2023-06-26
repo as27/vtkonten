@@ -60,7 +60,7 @@ const sumhaben = computed(() => {
 </script>
 
 <template>
-  <div class="konto">
+  <div class="konto" draggable="true" dropzone="true" :key="kontoname">
     <table>
       <tr class="top">
         <th class="linenr"></th>
@@ -94,12 +94,11 @@ table {
 div.konto {
   float: left;
   box-shadow: 3px 3px 5px lightgray;
-  width: 400px;
+  width: 600px;
   border: 1px solid #e1e1e1;
   border-radius: 5px;
   padding: 1em;
-  margin-right: 0.5em;
-  margin-bottom: 1em;
+  margin: 1em 0.5em;
 }
 
 caption {

@@ -5,7 +5,7 @@ import { ref } from 'vue'
 const props = defineProps(['modelValue'])
 defineEmits(['update:modelValue'])
 
-const kontendef = ref('Bank,Kasse')
+const kontendef = ref('Anlagen,Wertpapiere,Bank,Kasse,Eigenkapital,Kredite,Erträge,Aufwendungen,Gewinn,Verlust')
 
 const nextIndex = ref(2)
 
